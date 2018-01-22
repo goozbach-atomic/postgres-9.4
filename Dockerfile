@@ -11,6 +11,13 @@ LABEL name="goozbach/postgres:9.4-alpine" \
       atomic.type="system" \
       distribution-scope="private"
 
+# "Init script"
+RUN mkdir -p /exports/hostfs/usr/bin
+COPY init.sh /exports/hostfs/usr/bin
 COPY manifest.json service.template config.json.template /exports/
 
-CMD ["postgres"]
+# RUN YOUR COMMAND HERE
+#RUN 
+
+# Execution
+CMD ["/usr/bin/init.sh"]
