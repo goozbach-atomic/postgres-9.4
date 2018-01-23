@@ -3,11 +3,12 @@
 	"process": {
 		"terminal": true,
 		"user": {
-			"uid": 0,
-			"gid": 0
+			"uid": 70,
+			"gid": 70
 		},
 		"args": [
-			"sh"
+			"/docker-entrypoint.sh",
+                        "postgres"
 		],
 		"env": [
 			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
@@ -62,6 +63,24 @@
 	},
 	"hostname": "runc",
 	"mounts": [
+                {
+                        "type": "bind",
+                        "source": "/var/run/",
+                        "destination": "/var/run/",
+                        "options": [
+                            "rbind",
+                            "rw",
+                            "mode=755"
+                         ]
+                },
+                {       "type": "bind",
+                        "source": "/var/lib/postgresql",
+                        "destination": "/var/lib/postgresql",
+                        "options": [
+                            "rbind",
+                            "rw"
+                        ]
+                },
 		{
 			"destination": "/proc",
 			"type": "proc",
