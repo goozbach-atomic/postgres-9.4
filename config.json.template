@@ -11,7 +11,13 @@
 		],
 		"env": [
 			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-			"TERM=xterm"
+			"TERM=xterm",
+                        "POSTGRES_PASSWORD=postgres",
+                        "POSTGRES_USER=postgres",
+                        "PGDATA=/var/lib/postgresql/data",
+                        "POSTGRES_DB=postgres",
+                        "POSTGRES_INITDB_ARGS=''",
+                        "POSTGRES_INITDB_WALDIR=''"
 		],
 		"cwd": "/",
 		"capabilities": {
