@@ -64,6 +64,17 @@
 	"hostname": "runc",
 	"mounts": [
                 {
+                        "source": "/tmp",
+                        "destination": "/tmp",
+                        "type": "bind",
+                        "options": [
+                            "private",
+                            "bind",
+                            "rw",
+                            "mode=755"
+                        ]
+                },
+                {
                         "type": "bind",
                         "source": "/var/run/",
                         "destination": "/var/run/",
