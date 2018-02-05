@@ -201,7 +201,7 @@
         "type": "RLIMIT_NOFILE"
       }
     ],
-    "terminal": true,
+    "terminal": false,
     "user": {
       "gid": 70,
       "uid": 70
