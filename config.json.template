@@ -1,213 +1,214 @@
 {
-	"ociVersion": "1.0.0",
-	"process": {
-		"terminal": true,
-		"user": {
-			"uid": 70,
-			"gid": 70
-		},
-		"args": [
-			"/docker-entrypoint.sh",
-                        "postgres"
-		],
-		"env": [
-			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-			"TERM=xterm",
-                        "POSTGRES_PASSWORD=postgres",
-                        "POSTGRES_USER=postgres",
-                        "PGDATA=/var/lib/postgresql/data",
-                        "POSTGRES_DB=postgres",
-                        "POSTGRES_INITDB_ARGS=''",
-                        "POSTGRES_INITDB_WALDIR=''"
-		],
-		"cwd": "/",
-		"capabilities": {
-			"bounding": [
-				"CAP_AUDIT_WRITE",
-				"CAP_KILL",
-				"CAP_NET_BIND_SERVICE"
-			],
-			"effective": [
-				"CAP_AUDIT_WRITE",
-				"CAP_KILL",
-				"CAP_NET_BIND_SERVICE"
-			],
-			"inheritable": [
-				"CAP_AUDIT_WRITE",
-				"CAP_KILL",
-				"CAP_NET_BIND_SERVICE"
-			],
-			"permitted": [
-				"CAP_AUDIT_WRITE",
-				"CAP_KILL",
-				"CAP_NET_BIND_SERVICE"
-			],
-			"ambient": [
-				"CAP_AUDIT_WRITE",
-				"CAP_KILL",
-				"CAP_NET_BIND_SERVICE"
-			]
-		},
-		"rlimits": [
-			{
-				"type": "RLIMIT_NOFILE",
-				"hard": 1024,
-				"soft": 1024
-			}
-		],
-		"noNewPrivileges": true
-	},
-	"root": {
-		"path": "rootfs",
-		"readonly": true
-	},
-	"hostname": "runc",
-	"mounts": [
-                {
-                        "source": "/tmp",
-                        "destination": "/tmp",
-                        "type": "bind",
-                        "options": [
-                            "private",
-                            "bind",
-                            "rw",
-                            "mode=755"
-                        ]
-                },
-                {
-                        "type": "bind",
-                        "source": "/var/run/",
-                        "destination": "/var/run/",
-                        "options": [
-                            "rbind",
-                            "rw",
-                            "mode=755"
-                         ]
-                },
-                {       "type": "bind",
-                        "source": "/var/lib/postgresql",
-                        "destination": "/var/lib/postgresql",
-                        "options": [
-                            "rbind",
-                            "rw"
-                        ]
-                },
-		{
-			"destination": "/proc",
-			"type": "proc",
-			"source": "proc"
-		},
-		{
-			"destination": "/dev",
-			"type": "tmpfs",
-			"source": "tmpfs",
-			"options": [
-				"nosuid",
-				"strictatime",
-				"mode=755",
-				"size=65536k"
-			]
-		},
-		{
-			"destination": "/dev/pts",
-			"type": "devpts",
-			"source": "devpts",
-			"options": [
-				"nosuid",
-				"noexec",
-				"newinstance",
-				"ptmxmode=0666",
-				"mode=0620",
-				"gid=5"
-			]
-		},
-		{
-			"destination": "/dev/shm",
-			"type": "tmpfs",
-			"source": "shm",
-			"options": [
-				"nosuid",
-				"noexec",
-				"nodev",
-				"mode=1777",
-				"size=65536k"
-			]
-		},
-		{
-			"destination": "/dev/mqueue",
-			"type": "mqueue",
-			"source": "mqueue",
-			"options": [
-				"nosuid",
-				"noexec",
-				"nodev"
-			]
-		},
-		{
-			"destination": "/sys",
-			"type": "sysfs",
-			"source": "sysfs",
-			"options": [
-				"nosuid",
-				"noexec",
-				"nodev",
-				"ro"
-			]
-		},
-		{
-			"destination": "/sys/fs/cgroup",
-			"type": "cgroup",
-			"source": "cgroup",
-			"options": [
-				"nosuid",
-				"noexec",
-				"nodev",
-				"relatime",
-				"ro"
-			]
-		}
-	],
-	"linux": {
-		"resources": {
-			"devices": [
-				{
-					"allow": false,
-					"access": "rwm"
-				}
-			]
-		},
-		"namespaces": [
-			{
-				"type": "pid"
-			},
-			{
-				"type": "network"
-			},
-			{
-				"type": "ipc"
-			},
-			{
-				"type": "uts"
-			},
-			{
-				"type": "mount"
-			}
-		],
-		"maskedPaths": [
-			"/proc/kcore",
-			"/proc/latency_stats",
-			"/proc/timer_list",
-			"/proc/timer_stats",
-			"/proc/sched_debug",
-			"/sys/firmware"
-		],
-		"readonlyPaths": [
-			"/proc/asound",
-			"/proc/bus",
-			"/proc/fs",
-			"/proc/irq",
-			"/proc/sys",
-			"/proc/sysrq-trigger"
-		]
-	}
+  "hostname": "runc",
+  "linux": {
+    "maskedPaths": [
+      "/proc/kcore",
+      "/proc/latency_stats",
+      "/proc/timer_list",
+      "/proc/timer_stats",
+      "/proc/sched_debug",
+      "/sys/firmware"
+    ],
+    "namespaces": [
+      {
+        "type": "pid"
+      },
+      {
+        "type": "network"
+      },
+      {
+        "type": "ipc"
+      },
+      {
+        "type": "uts"
+      },
+      {
+        "type": "mount"
+      }
+    ],
+    "readonlyPaths": [
+      "/proc/asound",
+      "/proc/bus",
+      "/proc/fs",
+      "/proc/irq",
+      "/proc/sys",
+      "/proc/sysrq-trigger"
+    ],
+    "resources": {
+      "devices": [
+        {
+          "access": "rwm",
+          "allow": false
+        }
+      ]
+    }
+  },
+  "mounts": [
+    {
+      "destination": "/tmp",
+      "options": [
+        "private",
+        "bind",
+        "rw",
+        "mode=755"
+      ],
+      "source": "/tmp",
+      "type": "bind"
+    },
+    {
+      "destination": "/var/run/",
+      "options": [
+        "rbind",
+        "rw",
+        "mode=755"
+      ],
+      "source": "/var/run/",
+      "type": "bind"
+    },
+    {
+      "destination": "/var/lib/postgresql",
+      "options": [
+        "rbind",
+        "rw"
+      ],
+      "source": "/var/lib/postgresql",
+      "type": "bind"
+    },
+    {
+      "destination": "/proc",
+      "source": "proc",
+      "type": "proc"
+    },
+    {
+      "destination": "/dev",
+      "options": [
+        "nosuid",
+        "strictatime",
+        "mode=755",
+        "size=65536k"
+      ],
+      "source": "tmpfs",
+      "type": "tmpfs"
+    },
+    {
+      "destination": "/dev/pts",
+      "options": [
+        "nosuid",
+        "noexec",
+        "newinstance",
+        "ptmxmode=0666",
+        "mode=0620",
+        "gid=5"
+      ],
+      "source": "devpts",
+      "type": "devpts"
+    },
+    {
+      "destination": "/dev/shm",
+      "options": [
+        "nosuid",
+        "noexec",
+        "nodev",
+        "mode=1777",
+        "size=65536k"
+      ],
+      "source": "shm",
+      "type": "tmpfs"
+    },
+    {
+      "destination": "/dev/mqueue",
+      "options": [
+        "nosuid",
+        "noexec",
+        "nodev"
+      ],
+      "source": "mqueue",
+      "type": "mqueue"
+    },
+    {
+      "destination": "/sys",
+      "options": [
+        "nosuid",
+        "noexec",
+        "nodev",
+        "ro"
+      ],
+      "source": "sysfs",
+      "type": "sysfs"
+    },
+    {
+      "destination": "/sys/fs/cgroup",
+      "options": [
+        "nosuid",
+        "noexec",
+        "nodev",
+        "relatime",
+        "ro"
+      ],
+      "source": "cgroup",
+      "type": "cgroup"
+    }
+  ],
+  "ociVersion": "1.0.0",
+  "process": {
+    "args": [
+      "/docker-entrypoint.sh",
+      "postgres"
+    ],
+    "capabilities": {
+      "ambient": [
+        "CAP_AUDIT_WRITE",
+        "CAP_KILL",
+        "CAP_NET_BIND_SERVICE"
+      ],
+      "bounding": [
+        "CAP_AUDIT_WRITE",
+        "CAP_KILL",
+        "CAP_NET_BIND_SERVICE"
+      ],
+      "effective": [
+        "CAP_AUDIT_WRITE",
+        "CAP_KILL",
+        "CAP_NET_BIND_SERVICE"
+      ],
+      "inheritable": [
+        "CAP_AUDIT_WRITE",
+        "CAP_KILL",
+        "CAP_NET_BIND_SERVICE"
+      ],
+      "permitted": [
+        "CAP_AUDIT_WRITE",
+        "CAP_KILL",
+        "CAP_NET_BIND_SERVICE"
+      ]
+    },
+    "cwd": "/",
+    "env": [
+      "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "TERM=xterm",
+      "POSTGRES_PASSWORD=postgres",
+      "POSTGRES_USER=postgres",
+      "PGDATA=/var/lib/postgresql/data",
+      "POSTGRES_DB=postgres",
+      "POSTGRES_INITDB_ARGS=''",
+      "POSTGRES_INITDB_WALDIR=''"
+    ],
+    "noNewPrivileges": true,
+    "rlimits": [
+      {
+        "hard": 1024,
+        "soft": 1024,
+        "type": "RLIMIT_NOFILE"
+      }
+    ],
+    "terminal": true,
+    "user": {
+      "gid": 70,
+      "uid": 70
+    }
+  },
+  "root": {
+    "path": "rootfs",
+    "readonly": true
+  }
 }
